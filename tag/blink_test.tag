@@ -1,0 +1,14 @@
+35	half
+36	half
+37	close
+38	half
+39	half
+93	half
+94	half
+95	close
+96	close
+97	half
+98	half
+110	half
+111	close
+112	half
