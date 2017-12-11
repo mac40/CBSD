@@ -38,4 +38,5 @@ for i in range(6, len(listear)-7):
     #df_tmp=pd.DataFrame(data=[tmp_ear], columns=col)
     df_fin.loc[i]=tmp_ear
 df_fin.index.name="frame"
+df_fin.dropna(how='any', inplace=True)
 df_fin.to_csv("preprocessed/preproc_{}".format(args["data"][11:]), index=True, header=True)
