@@ -11,3 +11,7 @@
     ```
     python preproc_svm.py --data raw_data\video_name.csv
     ```
+6. run the following command instead to use the __normalized__ preprocessor
+    ```
+    python preproc_svm_normalizzato.py --data raw_data\video_name.csv
+    ```
