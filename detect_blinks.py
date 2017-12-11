@@ -159,9 +159,13 @@ def moving_av(mylist, N):
 			moving_aves.append(moving_ave)
 	return moving_aves
 
-users_final = pd.read_csv("tag/{}.tag".format(args["video"][6:-4]), sep='\t', header=None,
-                          names=['frame', 'tag'], index_col="frame")
-						  
+try:
+	users_final = pd.read_csv("tag/{}.tag".format(args["video"][6:-4]), sep='\t', header=None,
+	                          names=['frame', 'tag'], index_col="frame")
+except FileNotFoundError:
+	users_final = pd.read_csv("tag/{}.tag".format(args["video"][7:-4]), sep='\t', header=None,
+	                          names=['frame', 'tag'], index_col="frame")
+
 mov_ear_3=moving_av(ear_list,3)
 mov_ear_5=moving_av(ear_list,5)
 mov_ear_7=moving_av(ear_list,7)
@@ -181,8 +185,12 @@ ear_list = ear_list.fillna(0)
 #mask = ear_list.tag == 0
 #ear_list.tag = ear_list.tag.where(mask, 1)
 ear_list.index.name="frame"
-ear_list.to_csv("raw_data/{}.csv".format(
-	args["video"][6:-4]), index=True, header=True)
+try:
+	ear_list.to_csv("raw_data/{}.csv".format(
+			args["video"][6:-4]), index=True, header=True)
+except FileNotFoundError:
+	ear_list.to_csv("raw_data/{}.csv".format(
+            args["video"][7:-4]), index=True, header=True)
 
 # do a bit of cleanup
 cv2.destroyAllWindows()
