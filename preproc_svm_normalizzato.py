@@ -1,5 +1,5 @@
 # USAGE
-# python preproc_svm.py --data data_file.csv
+# python preproc_svm_normalizzato.py --data data_file.csv
 
 import argparse
 import pandas as pd
