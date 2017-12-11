@@ -1,7 +1,7 @@
 # Progetto CBSD
 0. remember to use 3 characters long extensions for files
 1. load video in video folder
-2. load tag file with same name of the video in the tag folder
+2. load tag file with same name of the video in the tag folder with extention _.tag_
 3. run the following command in the terminal from project's main folder
     ```
     python detect_blinks.py --shape-predictor shapre_predictor_68_face_landmarks.dat --video video\video_name.mp4
