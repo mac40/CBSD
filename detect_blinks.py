@@ -140,8 +140,8 @@ while True:
 			cv2.circle(frame, (x, y), 1, (0, 0, 255), -1)
 
 	# show the frame
-	# cv2.imshow("Frame", frame)
-	print(FRAME)
+	cv2.imshow("Frame", frame)
+	# print(FRAME)
 	key = cv2.waitKey(1) & 0xFF
 
 	FRAME += 1
