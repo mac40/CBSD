@@ -23,7 +23,7 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import ExtraTreesClassifier
 
-url = '/Users/andreadellavecchia/Documents/Data Science/Cognitive Behavioral And Social Data/CBSD/preprocessed/preproc_26122013_223310_cam.csv'
+url = '/Users/andreadellavecchia/Documents/Data Science/Cognitive Behavioral And Social Data/CBSD/balanced_preproc/balanced_preproc_all.csv'
 dataset = read_csv(url)
 
 print(dataset.shape)
@@ -133,3 +133,4 @@ predictions = model.predict(rescaledValidationX)
 print(accuracy_score(Y_validation, predictions))
 print(confusion_matrix(Y_validation, predictions))
 print(classification_report(Y_validation, predictions))
+
