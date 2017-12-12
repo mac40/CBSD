@@ -49,14 +49,16 @@ while True:
 
         shape = predictor(gray, rect)
         shape = face_utils.shape_to_np(shape)
-
-        cv2.putText(frame, "Manual Detection: {}".format(SHOWCASE_DATA.Manual_Detection[FRAME]), (10, 30),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-        cv2.putText(frame, "Frame: {}".format(FRAME), (10, 300),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-        cv2.putText(frame, "Auto Detection: {}".format(SHOWCASE_DATA.Auto_Detection[FRAME]), (10, 60),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-
+        try:
+            cv2.putText(frame, "Manual Detection: {}".format(SHOWCASE_DATA.Manual_Detection[FRAME]), (10, 30),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+            cv2.putText(frame, "Frame: {}".format(FRAME), (10, 300),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+            cv2.putText(frame, "Auto Detection: {}".format(SHOWCASE_DATA.Auto_Detection[FRAME]), (10, 60),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+        except:
+            cv2.putText(frame, "End of Data", (10, 60),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
         for (x, y) in shape:
             cv2.circle(frame, (x, y), 1, (0, 0, 255), -1)
 
