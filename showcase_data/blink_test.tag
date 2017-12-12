@@ -1,0 +1,11 @@
+frame	Manual_Detection	Auto_Detection
+0	1	0
+1	0	1
+2	0	1
+3	0	1
+4	1	0
+5	1	1
+6	1	1
+7	1	1
+8	1	0
+9	1	0
