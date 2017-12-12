@@ -37,6 +37,21 @@ for i in range(6, len(listear)-7):
     tmp_ear.append(tmp_tag)
     #df_tmp=pd.DataFrame(data=[tmp_ear], columns=col)
     df_fin.loc[i]=tmp_ear
+
 df_fin.index.name="frame"
-df_fin.dropna(how='any', inplace=True)
-df_fin.to_csv("preprocessed/preproc_{}".format(args["data"][11:]), index=True, header=True)
+
+df_fin = df_fin[df_fin.F1!=0]
+df_fin = df_fin[df_fin.F2!=0]
+df_fin = df_fin[df_fin.F3!=0]
+df_fin = df_fin[df_fin.F4!=0]
+df_fin = df_fin[df_fin.F5!=0]
+df_fin = df_fin[df_fin.F6!=0]
+df_fin = df_fin[df_fin.F7!=0]
+df_fin = df_fin[df_fin.F8!=0]
+df_fin = df_fin[df_fin.F9!=0]
+df_fin = df_fin[df_fin.F10!=0]
+df_fin = df_fin[df_fin.F11!=0]
+df_fin = df_fin[df_fin.F12!=0]
+df_fin = df_fin[df_fin.F13!=0]
+
+df_fin.to_csv("preprocessed_noNorm/preproc_{}".format(args["data"][11:]), index=True, header=True)
