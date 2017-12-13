@@ -1,7 +1,8 @@
 import numpy
 from pandas import DataFrame
 from matplotlib import pyplot
-from pandas import read_csv,to_csv
+from pandas import read_csv
+#from pandas import to_csv
 from pandas import set_option
 from pandas.plotting import scatter_matrix
 from sklearn.preprocessing import StandardScaler
@@ -24,22 +25,21 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.metrics import roc_auc_score
-url = './balanced_preproc/balanced_preproc_all.csv'
-dataset = read_csv(url)
+
+url = '/Users/andreadellavecchia/Documents/Data Science/Cognitive Behavioral And Social Data/CBSD/balanced_preproc/balanced_preproc_all.csv'
+dataset = read_csv(url, index_col="frame")
 
 print(dataset.shape)
 
 # descriptions, change precision to 3 places
 set_option('precision', 5)
-dataset_clean=dataset.drop(["frame"],axis=1)
 print(dataset.head())
-print(dataset_clean.head())
-print(dataset_clean.describe())
+print(dataset.describe())
 
 # Split-out validation dataset
 array = dataset.values
-X = array[1:,1:dataset.shape[1]-1].astype(float)
-Y = array[1:,dataset.shape[1]-1]
+X = array[:,:dataset.shape[1]-1].astype(float)
+Y = array[:,dataset.shape[1]-1]
 validation_size = 0.20
 seed = 7
 X_train, X_validation, Y_train, Y_validation = train_test_split(X, Y,test_size=validation_size, random_state=seed)
@@ -138,10 +138,10 @@ print(classification_report(Y_validation, predictions))
 print(roc_auc_score(Y_validation,predictions))
 
 def prev_to_csv(csv_in,csv_out,scaler=scaler,model=model):
-    X = read_csv(csv_in)
-    X_clean = X.drop(["frame"],axis=1)
-    rescaledX = scaler.transform(X_clean)
+    X = read_csv(csv_in, index_col="frame")
+    rescaledX = scaler.transform(X)
     predictions = model.predict(rescaledX)
     newdata = DataFrame(predictions,index = X["frame"],columns = ["predictions"])
     newdata.to_csv(csv_out)
 
+prev_to_csv("","")
