@@ -141,7 +141,7 @@ def prev_to_csv(csv_in,csv_out,scaler=scaler,model=model):
     X = read_csv(csv_in, index_col="frame")
     rescaledX = scaler.transform(X)
     predictions = model.predict(rescaledX)
-    newdata = DataFrame(predictions,index = X["frame"],columns = ["predictions"])
+    newdata = DataFrame(predictions, index=X.index, columns=["blink"])
     newdata.to_csv(csv_out)
 
-prev_to_csv("","")
+prev_to_csv("/Users/andreadellavecchia/Documents/Data Science/Cognitive Behavioral And Social Data/CBSD/non_training_data_preproc/preproc_video_test_2.csv","prova_validation.csv")
