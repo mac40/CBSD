@@ -16,6 +16,7 @@ DATA = pd.read_csv(ARGS["data"], sep=",", index_col=0)
 FRAME_LIST = list(DATA.index)
 BLINK_LIST = list(DATA.blink)
 
+#elimino 0.0 o 1.0 sparsi
 for n in range(len(BLINK_LIST)):
     #trovo il primo 1.0
     if BLINK_LIST[n]==1.0:
@@ -31,7 +32,7 @@ for n in range(len(BLINK_LIST)):
                 BLINK_LIST[i+2]=1.0
                 i+=1
 
-#ora ho solo 1.0 consecutivi parto a cercare dal fondo così elimino man mano e poi aggiungo 6 frame
+#ora costruisco singoli 1.0
 for n in range(len(BLINK_LIST)):
     #trovo il primo 1.0
     if BLINK_LIST[n]==1.0:
