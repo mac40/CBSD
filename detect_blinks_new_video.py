@@ -200,10 +200,10 @@ ear_list = ear_list.fillna(0)
 ear_list.index.name="frame"
 
 try:
-	ear_list.to_csv("non_training_data/{}.csv".format(
+	ear_list.to_csv("non_training_data_raw_data/{}/{}.csv".format(
 			args["video"][6:-4]), index=True, header=True)
 except FileNotFoundError:
-	ear_list.to_csv("non_training_data/{}.csv".format(
+	ear_list.to_csv("non_training_data_raw_data/{}.csv".format(
             args["video"][7:-4]), index=True, header=True)
 
 # do a bit of cleanup
