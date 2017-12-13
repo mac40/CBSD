@@ -23,7 +23,7 @@ listear=list(dati.ear)
 
 #normalizzo
 listear=np.array(listear)
-listear=(listear-min(listear))/(max(listear)-min(listear))
+listear=(listear-np.nanmin(listear))/(np.nanmax(listear)-np.nanmin(listear))
 listear=list(listear)
 
 listtag=list(dati.tag)
