@@ -7,27 +7,14 @@ import argparse
 import pandas as pd
 import copy
 
-#AP = argparse.ArgumentParser()
-#AP.add_argument("-d", "--data", required=True,
-#                help="data to be changed")
-#ARGS = vars(AP.parse_args())
+AP = argparse.ArgumentParser()
+AP.add_argument("-d", "--data", required=True,
+                help="data to be changed")
+ARGS = vars(AP.parse_args())
 
-#DATA = pd.read_csv(ARGS["data"], sep=",", index_col=0)
-url = '/Users/andreadellavecchia/Documents/Data Science/Cognitive Behavioral And Social Data/CBSD/prova_validation.csv'
-DATA = pd.read_csv(url, sep=",", index_col="frame")
+DATA = pd.read_csv(ARGS["data"], sep=",", index_col=0)
 FRAME_LIST = list(DATA.index)
 BLINK_LIST = list(DATA.blink)
-
-#TAG = 0
-
-#for n in range(len(BLINK_LIST)):
-#    if BLINK_LIST[n]==1.0:
-#        i = copy.deepcopy(n)
-#        while BLINK_LIST[i]==1.0:
-#            i+=1
-#        if BLINK_LIST(i+1)==0.0 & BLINK_LIST(i+2)==0.0 & BLINK_LIST(i+3)==0.0:
-#            BLINK_LIST[n+1:i]=0.0
-#        else:
 
 for n in range(len(BLINK_LIST)):
     #trovo il primo 1.0
@@ -54,27 +41,8 @@ for n in range(len(BLINK_LIST)):
             i+=1
 
 #scala gli 1.0 di 8 frame
-#for n in range(8,len(BLINK_LIST)):
-#    if BLINK_LIST[n-8]==1.0:
-#        BLINK_LIST[n-8]=0.0
-#        BLINK_LIST[n]=1.0
-
 BLINK_LIST=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]+BLINK_LIST[:len(BLINK_LIST)-8]
 
-
-#for BLINK in range(0, len(BLINK_LIST)):
-#    if BLINK_LIST[BLINK] == 1.0:
-#        for TEMP in range(BLINK+1, BLINK+13):
-#            if BLINK_LIST[TEMP] == 0.0:
-#                TAG += 1
-#        if TAG > 4:
-#            for TEMP in range(BLINK, BLINK + 13):
-#                BLINK_LIST[TEMP] = 0.0
-#            TAG = 0
-#        else:
-#            for TEMP in range(BLINK + 1, BLINK + 13):
-#                BLINK_LIST[TEMP] = 0.0
-#           TAG = 0
 
 BLINK_LIST = pd.DataFrame(BLINK_LIST, index=FRAME_LIST)
 BLINK_LIST.index.name='frame'
