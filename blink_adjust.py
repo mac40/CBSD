@@ -12,7 +12,7 @@ AP.add_argument("-d", "--data", required=True,
 ARGS = vars(AP.parse_args())
 
 DATA = pd.read_csv(ARGS["data"], sep=",", index_col=0)
-
+FRAME_LIST = list(DATA.index)
 BLINK_LIST = list(DATA.blink)
 
 TAG = 0
@@ -30,5 +30,7 @@ for BLINK in range(0, len(BLINK_LIST)):
             for TEMP in range(BLINK + 1, BLINK + 13):
                 BLINK_LIST[TEMP] = 0.0
             TAG = 0
-BLINK_LIST = pd.DataFrame(BLINK_LIST, list(DATA.blink))
+BLINK_LIST = pd.DataFrame(BLINK_LIST, index=FRAME_LIST)
+BLINK_LIST.index.name='frame'
+BLINK_LIST.columns = ['blink']
 BLINK_LIST.to_csv("results.csv")
