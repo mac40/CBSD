@@ -1,6 +1,7 @@
 import numpy
+from pandas import DataFrame
 from matplotlib import pyplot
-from pandas import read_csv
+from pandas import read_csv,to_csv
 from pandas import set_option
 from pandas.plotting import scatter_matrix
 from sklearn.preprocessing import StandardScaler
@@ -135,3 +136,12 @@ print(confusion_matrix(Y_validation, predictions))
 print(classification_report(Y_validation, predictions))
 
 print(roc_auc_score(Y_validation,predictions))
+
+def prev_to_csv(csv_in,csv_out,scaler=scaler,model=model):
+    X = read_csv(csv_in)
+    X_clean = X.drop(["frame"],axis=1)
+    rescaledX = scaler.transform(X_clean)
+    predictions = model.predict(rescaledX)
+    newdata = DataFrame(predictions,index = X["frame"],columns = ["predictions"])
+    newdata.to_csv(csv_out)
+
