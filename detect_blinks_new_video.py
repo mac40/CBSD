@@ -193,7 +193,7 @@ ear_list["mov_ear_3"] = mov_ear_3
 ear_list["mov_ear_5"] = mov_ear_5
 ear_list["mov_ear_7"] = mov_ear_7
 ear_list.columns = ["ear", "threshold", "mov_ear_3","mov_ear_5","mov_ear_7"]
-ear_list = ear_list.fillna(0)
+#ear_list = ear_list.fillna(0)
 #mask = ear_list.tag == 0
 #ear_list.tag = ear_list.tag.where(mask, 1)
 
