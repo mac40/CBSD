@@ -23,11 +23,11 @@ for n in range(len(BLINK_LIST)):
     if BLINK_LIST[n]==1.0:
         i = copy.deepcopy(n)
         #correggi 1.0 isolati: se è un 1.0 singolo o doppio diventa 0.0
-        if sum(BLINK_LIST[i:i+13])<=4.0:
+        if sum(BLINK_LIST[i:i+15])<=4.0:
             BLINK_LIST[i]=0.0
         else:
             #correggi 0.0 isolati: se ci sono 0.0 singoli o doppi appena dopo diventano 1.0
-            while (sum(BLINK_LIST[i:i+13])>4.0):
+            while (sum(BLINK_LIST[i:i+15])>4.0):
                 BLINK_LIST[i+1]=1.0
                 i+=1
 
