@@ -28,12 +28,20 @@ vs = FileVideoStream(args["video"]).start()
 fileStream = True
 time.sleep(1.0)
 
+'''
 try:
     SHOWCASE_DATA = pd.read_csv("showcase_data/{}.tag".format(args["video"][6:-4]), sep='\t',
                                 header=0, names=['frame', 'Manual_Detection', 'Auto_Detection'], index_col="frame")
 except FileNotFoundError:
     SHOWCASE_DATA = pd.read_csv("showcase_data/{}.tag".format(args["video"][7:-4]), sep='\t',
                                 header=0, names=['frame', 'Manual_Detection', 'Auto_Detection'], index_col="frame")
+'''
+raw_data=pd.read_csv("video_test_2.csv", index_col="frame")
+result=pd.read_csv("results.csv", index_col="frame")
+raw_data_1=raw_data.threshold
+SHOWCASE_DATA=pd.concat([raw_data_1, result], axis=1 )
+SHOWCASE_DATA=SHOWCASE_DATA.fillna(0)
+SHOWCASE_DATA=SHOWCASE_DATA.cumsum(axis=0)
 FRAME = 0
 
 while True:
@@ -50,11 +58,11 @@ while True:
         shape = predictor(gray, rect)
         shape = face_utils.shape_to_np(shape)
         try:
-            cv2.putText(frame, "Manual Detection: {}".format(SHOWCASE_DATA.Manual_Detection[FRAME]), (10, 30),
+            cv2.putText(frame, "Threshold: {}".format(SHOWCASE_DATA.threshold[FRAME]), (10, 30),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
             cv2.putText(frame, "Frame: {}".format(FRAME), (10, 300),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-            cv2.putText(frame, "Auto Detection: {}".format(SHOWCASE_DATA.Auto_Detection[FRAME]), (10, 60),
+            cv2.putText(frame, "SVM: {}".format(SHOWCASE_DATA.blink[FRAME]), (10, 60),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
         except:
             cv2.putText(frame, "End of Data", (10, 60),
