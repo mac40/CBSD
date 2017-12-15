@@ -1,4 +1,5 @@
 # import the necessary packages
+import matplotlib.pyplot as plt
 from scipy.spatial import distance as dist
 from imutils.video import FileVideoStream
 from imutils.video import VideoStream
@@ -49,20 +50,24 @@ while True:
         break
 
     frame = vs.read()
-    frame = imutils.resize(frame, width=900)
+    frame = imutils.resize(frame, width=450)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     rects = detector(gray, 0)
-
+    plot = raw_data.ear.plot()
+    plt.savefig('plot.png')
+    plot = cv2.imread('plot.png')
+    plot = imutils.resize(plot, width=450)
     for rect in rects:
 
         shape = predictor(gray, rect)
         shape = face_utils.shape_to_np(shape)
         try:
-            cv2.putText(frame, "Threshold: {}".format(SHOWCASE_DATA.threshold[FRAME]), (10, 30),
+            frame=np.concatenate((frame,plot), axis=0)
+            cv2.putText(frame, "OpenCV blink detection: {}".format(SHOWCASE_DATA.threshold[FRAME]), (10, 30),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
             cv2.putText(frame, "Frame: {}".format(FRAME), (10, 300),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-            cv2.putText(frame, "SVM: {}".format(SHOWCASE_DATA.blink[FRAME]), (10, 60),
+            cv2.putText(frame, "SVM    blink detection: {}".format(SHOWCASE_DATA.blink[FRAME]), (10, 60),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
         except:
             cv2.putText(frame, "End of Data", (10, 60),
