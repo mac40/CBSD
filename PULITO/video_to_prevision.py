@@ -255,6 +255,8 @@ listear=list(dati.ear)
 listear=np.array(listear)
 listear=(listear-np.nanmin(listear))/(np.nanmax(listear)-np.nanmin(listear))
 listear=list(listear)
+LIST_EAR_PER_TABELLA_PREVISIONI=listear
+LIST_EAR_PER_TABELLA_PREVISIONI=pd.Series(LIST_EAR_PER_TABELLA_PREVISIONI, index=range(0,len(LIST_EAR_PER_TABELLA_PREVISIONI)))
 
 col=['F1',"F2","F3","F4","F5",'F6',"F7","F8","F9","F10",'F11',"F12","F13"]
 df_fin=pd.DataFrame(columns=col)
@@ -359,7 +361,8 @@ result=BLINK_LIST
 ######################################################################
 raw_data=pd.read_csv("tmp.csv", index_col="frame")
 raw_data_1=raw_data.threshold
-SHOWCASE_DATA=pd.concat([raw_data_1, result], axis=1 )
+SHOWCASE_DATA=pd.concat([raw_data_1, result,LIST_EAR_PER_TABELLA_PREVISIONI], axis=1 )
 SHOWCASE_DATA=SHOWCASE_DATA.fillna(0)
+SHOWCASE_DATA.columns=["threshold","blink","ear_norm"]
 SHOWCASE_DATA.to_csv("prevision/data_final_{}.csv".format(args["video"][6:-4]),index=True, header=True)
 print("end")
