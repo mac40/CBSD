@@ -75,10 +75,11 @@ while True:
         for (x, y) in shape:
             cv2.circle(frame, (x, y), 1, (0, 0, 255), -1)
 
-    cv2.imshow("Frame", frame)
-    key = cv2.waitKey(1) & 0xFF
-    if key == ord("q"):
-            break
+    try:
+        cv2.imwrite("final_video/frame{}.jpg".format(FRAME), frame)
+        print("image frame{}.jpg saved".format(FRAME))
+    except:
+        print("imwrite error")
     FRAME += 1
 
 cv2.destroyAllWindows()
