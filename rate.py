@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import scipy.stats as stats
 
 
 url_data="xxx.csv"
@@ -10,6 +11,7 @@ baseline = pd.read_csv(url_base, index_col="frame")
 data=dataset.blink.values
 base=baseline.blink.values
 rate_medio=sum(base)/len(base)
+rate_IC = rate_medio + np.array([-1,1])*np.std(base)*stats.norm.ppf(0.975)/np.sqrt(len(base))
 delta_frame=int(1/rate_medio)
 
 for i in range(len(data)):
