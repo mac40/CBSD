@@ -18,7 +18,11 @@ for i in range(len(data)):
     if data[i]==1.0:
         data[i]+=-1
         #finestra separazione blink sinistra e lunga 2delta
-        for j in range(i-delta_frame+1,i+1):
+        if (i-delta_frame+1)<0:
+                a=0
+        else:
+            a=i-delta_frame+1
+        for j in range(a,i+1):
             data[j]+=1.0/(delta_frame)
 
 
