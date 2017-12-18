@@ -1,6 +1,6 @@
 #USAGE
 
-#python show_video_EAR_NOFACE.py --shape-predictor shape_predictor_68_face_landmarks.dat --video video/nome_video.avi --prevision prevision/nome_prevision.csv
+#python show_video_EAR_NOFACE.py --video video/nome_video.avi --prevision prevision/nome_prevision.csv
 
 
 
@@ -55,16 +55,12 @@ while True:
     
 
     try:
-		frame=np.concatenate((frame,plot), axis=0)
-		cv2.putText(frame, "OpenCV blink detection: {}".format(SHOWCASE_DATA_CUMSUM.threshold[FRAME]), (10, 30),
-					cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-		cv2.putText(frame, "Frame: {}".format(FRAME), (10, 300),
-					cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-		cv2.putText(frame, "SVM    blink detection: {}".format(SHOWCASE_DATA_CUMSUM.blink[FRAME]), (10, 60),
-					cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-	except:
-		cv2.putText(frame, "End of Data", (10, 60),
-					cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+	    frame=np.concatenate((frame,plot), axis=0)
+	    cv2.putText(frame, "OpenCV blink detection: {}".format(SHOWCASE_DATA_CUMSUM.threshold[FRAME]), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+	    cv2.putText(frame, "Frame: {}".format(FRAME), (10, 300), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+	    cv2.putText(frame, "SVM    blink detection: {}".format(SHOWCASE_DATA_CUMSUM.blink[FRAME]), (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+    except:
+	    cv2.putText(frame, "End of Data", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 
     try:
         cv2.imwrite("final_video/frame{}.jpg".format(FRAME), frame)
