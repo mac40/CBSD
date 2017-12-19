@@ -364,5 +364,10 @@ raw_data_1=raw_data.threshold
 SHOWCASE_DATA=pd.concat([raw_data_1, result,LIST_EAR_PER_TABELLA_PREVISIONI], axis=1 )
 SHOWCASE_DATA=SHOWCASE_DATA.fillna(0)
 SHOWCASE_DATA.columns=["threshold","blink","ear_norm"]
-SHOWCASE_DATA.to_csv("prevision/data_final_{}.csv".format(args["video"][6:-4]),index=True, header=True)
+try:
+	SHOWCASE_DATA.to_csv(
+		"prevision/data_final_{}.csv".format(args["video"][6:-4]),index=True, header=True)
+except:
+	SHOWCASE_DATA.to_csv(
+		"prevision/data_final_{}.csv".format(args["video"][8:-4]), index=True, header=True)
 print("end")
