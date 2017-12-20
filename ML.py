@@ -24,7 +24,7 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import ExtraTreesClassifier
-from sklearn.metrics import roc_auc_score
+from sklearn.metrics import roc_auc_score,roc_curve
 
 url = '/Users/andreadellavecchia/Documents/Data Science/Cognitive Behavioral And Social Data/CBSD/balanced_preproc/balanced_preproc_all.csv'
 dataset = read_csv(url, index_col="frame")
@@ -134,7 +134,7 @@ predictions = model.predict(rescaledValidationX)
 print(accuracy_score(Y_validation, predictions))
 print(confusion_matrix(Y_validation, predictions))
 print(classification_report(Y_validation, predictions))
-
+roc = roc_curve(Y_validation,predictions)
 print(roc_auc_score(Y_validation,predictions))
 
 def prev_to_csv(csv_in,csv_out,scaler=scaler,model=model):

@@ -30,6 +30,12 @@ y=np.zeros(delta_frame)
 for k in range (delta_frame,len(data)):
     y=np.append(y,sum(data[k-delta_frame:k])-1)
 
+#for h in range(len(y)):
+#    y[h]=np.log(y[h]+10)-np.log(10)
+
+#for h in range(len(y)):
+#    y[h]=y[h]**3
+
 newdata = pd.DataFrame(y, index=dataset.index, columns=["y"])
 newdata.to_csv("rate_prova.csv")
 
