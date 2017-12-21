@@ -14,6 +14,7 @@ import imutils
 import time
 import dlib
 import cv2
+import sys
 #########################
 import numpy
 from pandas import DataFrame
@@ -181,7 +182,7 @@ while True:
 
 	# show the frame
 	# cv2.imshow("Frame", frame)
-	print(FRAME)
+	sys.stdout.write('\r{}'.format(FRAME))
 	key = cv2.waitKey(1) & 0xFF
 
 	FRAME += 1

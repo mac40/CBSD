@@ -64,7 +64,7 @@ while True:
 
     try:
         cv2.imwrite("final_video/frame{}.jpg".format(FRAME), frame)
-        print("image frame{}.jpg saved".format(FRAME))
+        # print("image frame{}.jpg saved".format(FRAME))
     except:
         print("imwrite error")
     FRAME += 1
