@@ -289,10 +289,22 @@ num_folds = 10
 seed = 7
 scoring = 'accuracy'
 
+# Tune scaled SVM
+scaler = StandardScaler().fit(X_train)
+rescaledX = scaler.transform(X_train)
+c_values = [0.1, 0.3, 0.5, 0.7, 0.9, 1.0, 1.3, 1.5, 1.7, 2.0]
+kernel_values = ['linear', 'poly', 'rbf', 'sigmoid']
+param_grid = dict(C=c_values, kernel=kernel_values)
+model = SVC()
+kfold = KFold(n_splits=num_folds, random_state=seed)
+grid = GridSearchCV(estimator=model, param_grid=param_grid, scoring=scoring, cv=kfold)
+grid_result = grid.fit(rescaledX, Y_train)
+
+# prepare the model
 # prepare the model
 scaler = StandardScaler().fit(X_train)
 rescaledX = scaler.transform(X_train)
-model = SVC(C=2.0)  #choose our best model and C
+model = SVC(C=grid_result.best_params_['C'])  #choose our best model and C
 model.fit(rescaledX, Y_train)
 
 # estimate accuracy on validation dataset
