@@ -96,6 +96,7 @@ while True:
     plt.xticks(SHOWCASE_DATA.index[::frequency], my_xticks[::frequency], rotation=45)
 	
     plt.savefig('plot.png')
+    plt.close()
     plot = cv2.imread('plot.png')
     plot = imutils.resize(plot, width=450)
 	
