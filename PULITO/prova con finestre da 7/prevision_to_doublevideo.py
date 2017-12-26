@@ -118,7 +118,10 @@ while True:
         print("image frame{}.jpg saved".format(FRAME))
     except:
         print("imwrite error")
-    FRAME += 1
+    if fps>22:
+	    FRAME += 2
+    else:
+        FRAME += 1
 
 cv2.destroyAllWindows()
 vs.stop()
