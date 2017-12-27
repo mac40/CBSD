@@ -1,6 +1,6 @@
 #USAGE
 
-#python prevision_to_doublevideo.py --video video/nome_video.mp4 --prevision prevision/data_final_nome_prevision.csv
+#python prevision_to_doublevideo.py --video video/nome_video.mp4 --prevision prevision/data_final_nome.csv
 
 
 
