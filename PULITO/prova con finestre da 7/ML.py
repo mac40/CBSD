@@ -1,10 +1,8 @@
-import numpy
-from pandas import DataFrame
-import matplotlib as plt
+
+import matplotlib.pyplot as plt
 from pandas import read_csv
 #from pandas import to_csv
 from pandas import set_option
-from pandas.plotting import scatter_matrix
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
@@ -20,10 +18,6 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.metrics import roc_auc_score,roc_curve
 
 url = './balanced_preproc/balanced_preproc_all.csv'
@@ -69,12 +63,12 @@ for name, model in models:
   print(msg)
 
 # Compare Algorithms
-fig = plt.pyplot.figure()
+fig = plt.figure()
 fig.suptitle('Algorithm Comparison')
 ax = fig.add_subplot(111)
-plt.pyplot.boxplot(results)
+plt.boxplot(results)
 ax.set_xticklabels(names)
-plt.pyplot.show()
+plt.show()
 
 # Standardize the dataset
 pipelines = []
@@ -98,12 +92,12 @@ for name, model in pipelines:
 
 
 # Compare Algorithms
-fig = plt.pyplot.figure()
+fig = plt.figure()
 fig.suptitle('Scaled Algorithm Comparison')
 ax = fig.add_subplot(111)
-plt.pyplot.boxplot(results)
+plt.boxplot(results)
 ax.set_xticklabels(names)
-plt.pyplot.show()
+plt.show()
 
 # Tune scaled SVM
 scaler = StandardScaler().fit(X_train)
@@ -137,22 +131,21 @@ print(classification_report(Y_validation, predictions))
 fpr, tpr, threshold = roc_curve(Y_validation,predictions)
 print(roc_auc_score(Y_validation,predictions))
 roc_auc = roc_auc_score(Y_validation,predictions)
-plt.pyplot.title('Receiver Operating Characteristic')
-plt.pyplot.plot(fpr, tpr, 'b', label = 'AUC = %0.2f' % roc_auc)
-plt.pyplot.legend(loc = 'lower right')
-plt.pyplot.plot([0, 1], [0, 1],'r--')
-plt.pyplot.xlim([0, 1])
-plt.pyplot.ylim([0, 1])
-plt.pyplot.ylabel('True Positive Rate')
-plt.pyplot.xlabel('False Positive Rate')
-plt.pyplot.show()
 
-"""def prev_to_csv(csv_in,csv_out,scaler=scaler,model=model):
-    X = read_csv(csv_in, index_col="frame")
-    rescaledX = scaler.transform(X)
-    predictions = model.predict(rescaledX)
-    newdata = DataFrame(predictions, index=X.index, columns=["blink"])
-    newdata.to_csv(csv_out)
+# calculate the fpr and tpr for all thresholds of the classification
+probs = model.predict_proba(X_validation)
+preds = probs[:,1]
+fpr, tpr, threshold = roc_curve(Y_validation, preds)
 
-prev_to_csv("/Users/andreadellavecchia/Documents/Data Science/Cognitive Behavioral And Social Data/CBSD/non_training_data_preproc/preproc_video_test_2.csv","prova_validation.csv")
-"""
+# method I: plt
+fig = plt.figure()
+plt.title('Receiver Operating Characteristic')
+plt.plot(fpr, tpr, 'b', label = 'AUC = %0.2f' % roc_auc)
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'r--')
+plt.xlim([0, 1])
+plt.ylim([0, 1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+plt.show()
+
